@@ -6,6 +6,15 @@
 //  Copyright (c) 2015 GemmaShearer. All rights reserved.
 //
 //properties vs local variables - the array is defined inside the UIViewController class so it is a global variable and accessible anywhere. So is the array. But my Tiger is a local variable and is only available inside the viewDidLoad function
+// in a class we can access properties using the self keywowrd in a struct we cannot do this
+
+//in both a struct and a class we can acces functions using the self keyword. can use self to access functions inside other functions - this is important when there is a naming conflict
+
+// self is the implicit instance of the class we are working with
+
+//more about self: self is relative - can use it to refer to the viewController - self refers to the viewController etc.
+// 
+
 
 import UIKit
 
@@ -15,7 +24,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var breedLabel: UILabel!
+    @IBOutlet weak var randomFactLabel: UILabel!
     
+    // when do we use self? when accessing properties
     //defining an empty array that we can just start adding stuff to
     var myTigers:[Tiger] = []
     
@@ -31,17 +42,22 @@ class ViewController: UIViewController {
         myTiger.breed = "Bengal Tiger"
         myTiger.age = 3
         myTiger.image = UIImage(named: "BengalTiger.jpg")
+        myTiger.age = myTiger.ageInTigerYearsFromAge(myTiger.age)
         
         //this is adding the myTiger instance to the myTigers array, so John will now be in the array
+    
+        myTiger.chuffANumberOfTimes(5, isLoud: true)
         
-        myTigers.append(myTiger)
+        self.myTigers.append(myTiger)
         
         println("My Tiger's name is: \(myTiger.name), its age is: \(myTiger.age), its breed is \(myTiger.breed) and here is it's photo \(myTiger.image)")
         
-        myImageView.image = myTiger.image
-        nameLabel.text = myTiger.name
-        ageLabel.text = "\(myTiger.age)"
-        breedLabel.text = myTiger.breed
+        self.myImageView.image = myTiger.image
+        self.nameLabel.text = myTiger.name
+        self.ageLabel.text = "\(myTiger.age)"
+        self.breedLabel.text = myTiger.breed
+        self.randomFactLabel.text = myTiger.randomFact()
+        
         
         
         //this is creating the instance of secondTiger
@@ -50,22 +66,27 @@ class ViewController: UIViewController {
         secondTiger.breed = "Indochinese Tiger"
         secondTiger.age = 2
         secondTiger.image = UIImage(named: "IndochineseTiger.jpg")
+        secondTiger.age = secondTiger.ageInTigerYearsFromAge(secondTiger.age)
         
         var thirdTiger = Tiger()
         thirdTiger.name = "Pete"
         thirdTiger.breed = "Malayan Tiger"
         thirdTiger.age = 4
         thirdTiger.image = UIImage(named: "MalayanTiger.jpg")
+        thirdTiger.age = thirdTiger.ageInTigerYearsFromAge(thirdTiger.age)
         
         var fourthTiger = Tiger()
         fourthTiger.name = "Nigel"
         fourthTiger.breed = "Siberian Tiger"
         fourthTiger.age = 5
         fourthTiger.image = UIImage(named: "SiberianTiger.jpg")
+        fourthTiger.age = fourthTiger.ageInTigerYearsFromAge(fourthTiger.age)
         
         //this is the shorthand for adding the rest of the instances of the tiger struct to the array
         
-        myTigers += [secondTiger, thirdTiger, fourthTiger]
+        self.myTigers += [secondTiger, thirdTiger, fourthTiger]
+        
+        myTiger.chuffANumberOfTimes(3)
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,9 +124,12 @@ class ViewController: UIViewController {
             self.nameLabel.text = tiger.name
             self.ageLabel.text = "\(tiger.age)"
             self.breedLabel.text = tiger.breed
+            self.randomFactLabel.text = tiger.randomFact()  
             }, completion: {(finished: Bool) -> () in
         
         })
     }
 }
+
+
 
