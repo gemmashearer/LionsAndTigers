@@ -65,7 +65,7 @@ struct Tiger {
     }
 }
 
-
+//the randomFact has a bug - it sometimes shows the same fact repeatedly - look up how to fix this
 
 
 //self keyword - conflict between functions and variable names.

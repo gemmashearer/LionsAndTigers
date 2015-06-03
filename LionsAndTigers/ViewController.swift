@@ -15,7 +15,7 @@
 //more about self: self is relative - can use it to refer to the viewController - self refers to the viewController etc.
 // 
 
-
+// I need to check that myTiger is actually at 0 in my array
 import UIKit
 
 class ViewController: UIViewController {
@@ -29,9 +29,14 @@ class ViewController: UIViewController {
     // when do we use self? when accessing properties
     //defining an empty array that we can just start adding stuff to
     var myTigers:[Tiger] = []
+    var lions: [Lion] = []
     
     //defining the current index as being 0
     var currentIndex = 0
+    
+    // setting up the variable to track the animal that is being displayed. Starts at 0 because the is the myTiger index position
+    
+    var currentAnimal = (species: "Tiger", index: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,18 +51,15 @@ class ViewController: UIViewController {
         
         //this is adding the myTiger instance to the myTigers array, so John will now be in the array
     
-        myTiger.chuffANumberOfTimes(5, isLoud: true)
+        //myTiger.chuffANumberOfTimes(5, isLoud: true)
         
         self.myTigers.append(myTiger)
-        
-        println("My Tiger's name is: \(myTiger.name), its age is: \(myTiger.age), its breed is \(myTiger.breed) and here is it's photo \(myTiger.image)")
         
         self.myImageView.image = myTiger.image
         self.nameLabel.text = myTiger.name
         self.ageLabel.text = "\(myTiger.age)"
         self.breedLabel.text = myTiger.breed
         self.randomFactLabel.text = myTiger.randomFact()
-        
         
         
         //this is creating the instance of secondTiger
@@ -85,22 +87,26 @@ class ViewController: UIViewController {
         //this is the shorthand for adding the rest of the instances of the tiger struct to the array
         
         self.myTigers += [secondTiger, thirdTiger, fourthTiger]
+   
         
         myTiger.chuffANumberOfTimes(3)
         
-        //creating an instance of the lion class
+        //creating an instance of the lion class. We also need a new array
         var lion = Lion()
         lion.age = 4
         lion.isAlphaMale = false
         lion.image = UIImage(named: "Lion.jpg")
+        lion.name = "Mufasa"
         lion.subspecies = "west African"
         
         var lioness = Lion()
         lioness.age = 3
         lioness.isAlphaMale = false
-        lioness.image = UIImage(named: "Lioness.jpg")
+        lioness.image = UIImage(named: "Lioness.jpeg")
         lioness.name = "Sarabi"
         lioness.subspecies = "Barbary"
+        
+        self.lions += [lion, lioness]
         
     }
 
@@ -110,39 +116,58 @@ class ViewController: UIViewController {
     }
 
     @IBAction func nextBarButtonItemPressed(sender: UIBarButtonItem) {
-        //creates a variable which will be the random index (i.e. the number in the array)
+        updateAnimal()
+        updateView()
         
-        var randomIndex:Int
-        // run the do while loop - this will check to see whether the random index is the same as the current index. If the values are the same the loop will run until they are no longer the same
-        do {
+        //these 2 functions will update the animal then update the view each time the button is pressed
+    
+    }
+    
+    //function for tracking the animal - its a helper function.
+    // what this is doing. If the current animal is a tiger we will pull up the lion array. If a lion bring up a tiger from the array. Will then update the current animal to show whatever has just been pulled up
+    func updateAnimal () {
+        switch currentAnimal {
+        case ("Tiger", _) :
+            let randomIndex = Int(arc4random_uniform(UInt32(lions.count)))
+            currentAnimal = ("Lion", randomIndex)
+            
+        default :
+        let randomIndex = Int(arc4random_uniform(UInt32(myTigers.count)))
+        currentAnimal = ("Tiger", randomIndex)
+            println("Tigers")
+            
+        }
+    }
+    
+    //this is another helper function - this will update the UI. We can refactor all the code for when the button is presses
+    
+  
+     
+        func updateView () {
+            
+            UIView.transitionWithView(self.view, duration: 2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                
+                if self.currentAnimal.species == "Tiger" {
+                    println("update view function")
+                    let tiger = self.myTigers[self.currentAnimal.index]
+                    self.myImageView.image = tiger.image
+                    self.breedLabel.text = tiger.breed
+                    self.ageLabel.text = "\(tiger.age)"
+                    self.nameLabel.text = tiger.name
+                    self.randomFactLabel.text = tiger.randomFact()
+                }
+                else if self.currentAnimal.species == "Lion" {
+                    let lion = self.lions[self.currentAnimal.index]
+                    self.myImageView.image = lion.image
+                    self.breedLabel.text = lion.subspecies
+                    self.ageLabel.text = "\(lion.age)"
+                    self.nameLabel.text = lion.name
+                }
+                self.randomFactLabel.hidden = false
+                }, completion: {
+                    (finished: Bool) -> () in
+            })
         
-        randomIndex = Int(arc4random_uniform(UInt32(myTigers.count)))
-        } while currentIndex == randomIndex
-        
-        currentIndex = randomIndex
-        // this is getting a random index - based on how many indices there are in the myTigers array
-        //this is setting the tiger to be whatever was pulled out of the tiger index
-        
-        let tiger = myTigers[randomIndex]
-        
-        //this is showing what is going to be displayed when the button is pressed - i.e. whatever tiger is taken out of the array along with all the properties set for it in place of the label
-        
-//        
-//        myImageView.image = tiger.image
-//        nameLabel.text = tiger.name
-//        ageLabel.text = "\(tiger.age)"
-//        breedLabel.text = tiger.breed
-        
-        UIView.transitionWithView(self.view, duration: 2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-            //we are using self here to access the properties - this allows us to access the properties rather than just accessing the name
-            self.myImageView.image = tiger.image
-            self.nameLabel.text = tiger.name
-            self.ageLabel.text = "\(tiger.age)"
-            self.breedLabel.text = tiger.breed
-            self.randomFactLabel.text = tiger.randomFact()  
-            }, completion: {(finished: Bool) -> () in
-        
-        })
     }
 }
 
