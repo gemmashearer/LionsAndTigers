@@ -87,6 +87,21 @@ class ViewController: UIViewController {
         self.myTigers += [secondTiger, thirdTiger, fourthTiger]
         
         myTiger.chuffANumberOfTimes(3)
+        
+        //creating an instance of the lion class
+        var lion = Lion()
+        lion.age = 4
+        lion.isAlphaMale = false
+        lion.image = UIImage(named: "Lion.jpg")
+        lion.subspecies = "west African"
+        
+        var lioness = Lion()
+        lioness.age = 3
+        lioness.isAlphaMale = false
+        lioness.image = UIImage(named: "Lioness.jpg")
+        lioness.name = "Sarabi"
+        lioness.subspecies = "Barbary"
+        
     }
 
     override func didReceiveMemoryWarning() {

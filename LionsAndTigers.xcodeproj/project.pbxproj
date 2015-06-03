@@ -22,6 +22,7 @@
 		CFE370B91B1A438B002283F3 /* Lioness.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CFE370B11B1A438B002283F3 /* Lioness.jpeg */; };
 		CFE370BA1B1A438B002283F3 /* MalayanTiger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CFE370B21B1A438B002283F3 /* MalayanTiger.jpg */; };
 		CFE370BB1B1A438B002283F3 /* SiberianTiger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CFE370B31B1A438B002283F3 /* SiberianTiger.jpg */; };
+		CFF72DCB1B1EFDB60017FE6F /* Lion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF72DCA1B1EFDB60017FE6F /* Lion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		CFE370B11B1A438B002283F3 /* Lioness.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Lioness.jpeg; sourceTree = "<group>"; };
 		CFE370B21B1A438B002283F3 /* MalayanTiger.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MalayanTiger.jpg; sourceTree = "<group>"; };
 		CFE370B31B1A438B002283F3 /* SiberianTiger.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SiberianTiger.jpg; sourceTree = "<group>"; };
+		CFF72DCA1B1EFDB60017FE6F /* Lion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				CFE3708B1B1A3D2F002283F3 /* ViewController.swift */,
 				CFE3708D1B1A3D2F002283F3 /* Main.storyboard */,
 				CFE370A91B1A414F002283F3 /* Tiger.swift */,
+				CFF72DCA1B1EFDB60017FE6F /* Lion.swift */,
 				CFE370901B1A3D2F002283F3 /* Images.xcassets */,
 				CFE370921B1A3D2F002283F3 /* LaunchScreen.xib */,
 				CFE370871B1A3D2F002283F3 /* Supporting Files */,
@@ -258,6 +261,7 @@
 				CFE3708C1B1A3D2F002283F3 /* ViewController.swift in Sources */,
 				CFE370AA1B1A414F002283F3 /* Tiger.swift in Sources */,
 				CFE3708A1B1A3D2F002283F3 /* AppDelegate.swift in Sources */,
+				CFF72DCB1B1EFDB60017FE6F /* Lion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +459,7 @@
 				CFE370A51B1A3D2F002283F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CFE370A61B1A3D2F002283F3 /* Build configuration list for PBXNativeTarget "LionsAndTigersTests" */ = {
 			isa = XCConfigurationList;
@@ -463,6 +468,7 @@
 				CFE370A81B1A3D2F002283F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

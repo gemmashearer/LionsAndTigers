@@ -33,6 +33,7 @@ struct Tiger {
     //this function and the one above it that has the same name don't have a naming conflict because they have different parameters
     
     //what this function is doing - looping through and checking the parameters that have been set - if isLoud is true it will print the Tiger: chuff chuff, if not it will go on to the else statement and print Tiger: purr purr
+    
     func chuffANumberOfTimes (numberofTimes: Int, isLoud: Bool) {
         for var chuffTimes = 1; chuffTimes <= numberofTimes; chuffTimes++ {
             if isLoud {
@@ -63,6 +64,7 @@ struct Tiger {
             return randomFact
     }
 }
+
 
 
 
