@@ -29,7 +29,8 @@ class ViewController: UIViewController {
     // when do we use self? when accessing properties
     //defining an empty array that we can just start adding stuff to
     var myTigers:[Tiger] = []
-    var lions: [Lion] = []
+    var lions:[Lion] = []
+    var lionCubs:[LionCub] = []
     
     //defining the current index as being 0
     var currentIndex = 0
@@ -115,6 +116,30 @@ class ViewController: UIViewController {
         
         self.lions += [lion, lioness]
         
+        //instances of the LionCub class being initialized
+        
+        var lionCub = LionCub()
+        lionCub.age = 1
+        lionCub.name = "Simba"
+        lionCub.image = UIImage(named: "LionCub1.jpg")
+        lionCub.subspecies = "Masai"
+        lionCub.isAlphaMale = true
+       
+        
+        
+        lionCub.roar()
+        lionCub.rubLionCubsBelly()
+        
+        var femaleLionCub = LionCub()
+        femaleLionCub.age = 1
+        femaleLionCub.name = "Nala"
+        femaleLionCub.image = UIImage(named: "LionCub2.jpeg")
+        femaleLionCub.subspecies = "Transvaal"
+        femaleLionCub.isAlphaMale = false
+        
+        
+        self.lionCubs += [lionCub, femaleLionCub]
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -134,10 +159,14 @@ class ViewController: UIViewController {
     // what this is doing. If the current animal is a tiger we will pull up the lion array. If a lion bring up a tiger from the array. Will then update the current animal to show whatever has just been pulled up
     func updateAnimal () {
         switch currentAnimal {
-        case ("Tiger", _) :
+        case ("Tiger", _) : //underscore means the current index is not important
             let randomIndex = Int(arc4random_uniform(UInt32(lions.count)))
             currentAnimal = ("Lion", randomIndex)
             
+            //creating a new case so that the lionCub can be displayed
+        case ("Lion", _) :
+            let randomIndex = Int(arc4random_uniform(UInt32(lionCubs.count)))
+            currentAnimal = ("LionCub", randomIndex) //means giving a random index
         default :
         let randomIndex = Int(arc4random_uniform(UInt32(myTigers.count)))
         currentAnimal = ("Tiger", randomIndex)
@@ -170,6 +199,14 @@ class ViewController: UIViewController {
                     self.ageLabel.text = "\(lion.age)"
                     self.nameLabel.text = lion.name
                     self.randomFactLabel.text = lion.randomFact()
+                }
+                else if self.currentAnimal.species == "LionCub" {
+                    let lionCub = self.lionCubs[self.currentAnimal.index]
+                    self.myImageView.image = lionCub.image
+                    self.breedLabel.text = lionCub.subspecies
+                    self.ageLabel.text = "\(lionCub.age)"
+                    self.nameLabel.text = lionCub.name
+                    self.randomFactLabel.text = lionCub.randomFact()
                 }
                 self.randomFactLabel.hidden = false
                 }, completion: {
